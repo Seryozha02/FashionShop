@@ -1,0 +1,18 @@
+.ui.card>.image>img,
+.ui.cards>.card>.image>img {
+    width: 100px;
+    background:none;
+}
+
+.ui.card>.buy-info{
+    padding: 5px;
+    height: 60px;
+    width: 100%;
+}
+.ui.card>.flip{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    vi
+    background-color: aquamarine;
+}

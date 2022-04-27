@@ -1,25 +1,34 @@
+import Footer from "./components/footer/Footer.jsx";
 import "./App.css";
-import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
-import Home from "./components/home/Home";
-import Products from "./components/products/Products";
+import Header from "./components/header/Header.jsx";
+import Home from "./components/home/Home.jsx";
+import Dashboard from "./components/dashboard/Dashboard.jsx";
+import Products from "./components/products/Products.jsx";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import LoginPage from "./components/login/LoginPage";
-import Dashboard from "./components/dashboard/Dashboard";
+import LoginPage from "./components/login/LoginPage.jsx";
+import Loading from "./components/loader/Loading.jsx";
+import { useAuth0 } from "@auth0/auth0-react";
 
+function App() {
+  const { isLoading } = useAuth0();
 
-function App(slides) {
   return (
     <BrowserRouter>
       <div className="App">
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={ <Products/> } />
-          <Route path="/login" element={ <LoginPage />} />
-          <Route path="/dashboard" element={ <Dashboard />} />
-        </Routes>
-        <Footer />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>            
+            <Header className="ui fixed inverted main menu" />
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/products" element={<Products />}></Route>
+              <Route path="/dashboard" element={<Dashboard />}></Route>
+              <Route path="/login" element={<LoginPage />}></Route>
+            </Routes>
+            <Footer />
+          </>
+        )}
       </div>
     </BrowserRouter>
   );

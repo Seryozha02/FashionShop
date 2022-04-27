@@ -1,0 +1,11 @@
+.dashboard{
+margin-top: 200px;
+
+}
+.ui.container {
+    display: block;
+    background-color: red !important;
+
+}
+
+

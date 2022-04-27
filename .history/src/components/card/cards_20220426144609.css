@@ -1,0 +1,34 @@
+.ui.cards>.card{
+    display: flex;
+    background-color:white;
+    justify-content: center;
+
+}
+.ui.card {
+    margin: 0;
+    align-items: center;
+    position: relative;
+    transition: .8s;
+}
+.ui.card:hover{
+    transform: scale(1.11) rotateZ(360deg);
+}
+@keyframes animationFlip
+
+.productItems.ui.grid {
+    margin: 2vh;
+    gap: 20px;
+  }
+
+.ui.card>.image,
+ .ui.cards>.card>.image {
+    width: 100px;
+    background:none;
+}
+
+.pagination-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

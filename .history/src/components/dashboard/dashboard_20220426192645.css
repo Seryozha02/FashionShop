@@ -1,0 +1,6 @@
+.dashboard{
+margin-top: 200px;
+}
+.dashboard .ui.container{
+   background-color: #fff !important;
+}

@@ -1,25 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Header, Image, Modal, Segment } from "semantic-ui-react";
-import BuyForm from "./BuyForm"
+import BuyForm from "./BuyForm";
 import "./BuyProduct.css";
 import { confirmOrder } from "../../services/api";
+import { getOrdersByUserId } from "../../services/api";
 import { useAuth0 } from "@auth0/auth0-react";
 
-function BuyProduct({ productInfo, item }) {
+function BuyProduct({ productInfo, item, setResponseInfo, stock }) {
   const { error, isAuthenticated, isLoading, user, getAccessTokenSilently } =
     useAuth0();
 
   const { description, image, name, price } = productInfo;
-
   const [open, setOpen] = useState(false);
   const inintFormData = { address: "", phone: "", paymentMethod: "cash" };
   const [options, setOptions] = useState(inintFormData);
+  const [disable, setDisable] = useState(true);
+  const [countProduct, setCountProduct] = useState(stock);
 
+  // useEffect(()=>{},[stock])
+
+  // console.log("item",item);
   async function confirmAction() {
     try {
       const token = await getAccessTokenSilently();
-      console.log("options",options);
-      debugger;
       const userObj = {
         id: user.sub,
         email: user.email,
@@ -27,14 +30,57 @@ function BuyProduct({ productInfo, item }) {
         picture: user.picture,
       };
       const orderStatus = await confirmOrder(userObj, item, token, options);
+
+      const getOrderName = await getOrdersByUserId(userObj.id, token);
+
+      const prodName = getOrderName.filter(
+        (item) => item.id == orderStatus.info.OrderId
+      );
+
+      setResponseInfo(`You buy the product ${prodName[0].product.name}`);
+
       console.log(orderStatus);
     } catch (error) {
       console.log(error);
     }
   }
-  function changeOptions(prop) {
-    console.log("prop",prop);
-    setOptions({ ...options, ...prop });
+  // useEffect(() => {
+  //   let status = false;
+  //   for (let key in options) {
+  //     // console.log("options[key]",options[key]);
+  //     if (!options[key]) {
+  //       status = true;
+  //     }
+  //   }
+  //   setDisable(status);
+  // }, [options]);
+
+  useEffect(() => {
+    if (open === false) {
+      resetOptions();
+    }
+    console.log("disable", disable);
+    let status = false;
+    for (let key in options) {
+      if (!options[key] && key !== "paymentMethod") {
+        status = true;
+      }
+    }
+
+    setDisable(status);
+  }, [options, open]);
+  
+
+  function resetOptions() {
+    for (let key in options) {
+      if (key != "paymentMethod") {
+        options[key] = "";
+      }
+    }
+  }
+
+  function changeOptions(prop) {    
+    setOptions({ ...options, ...prop });    
   }
 
   return (
@@ -43,10 +89,12 @@ function BuyProduct({ productInfo, item }) {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={
-        <Button color="green" inverted floated="right">
+      trigger={countProduct?(<Button color="green" inverted floated="right">
+      BUY
+    </Button>):(<Button disabled = {true} color="green" inverted floated="right">
           BUY
-        </Button>
+        </Button>)
+        
       }
     >
       <Modal.Content image>
@@ -61,7 +109,10 @@ function BuyProduct({ productInfo, item }) {
         <Modal.Description>
           <Header>{name}</Header>
           <p>{description}</p>
-          <p>{price + "$"}</p>
+          <p>
+            {price}
+            {item.currency}
+          </p>
         </Modal.Description>
 
         <BuyForm userName={user.name} changeOptions={changeOptions} />
@@ -74,10 +125,12 @@ function BuyProduct({ productInfo, item }) {
             </Button>
             <Button
               content="Confirm"
+              disabled={disable}
               labelPosition="right"
               icon="checkmark"
               onClick={() => {
                 setOpen(false);
+                setDisable(true);
                 confirmAction();
               }}
               positive
