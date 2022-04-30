@@ -33,8 +33,6 @@ function BuyProduct({ productInfo, item, setResponseInfo, stock }) {
 
       const getOrderName = await getOrdersByUserId(userObj.id, token);
 
-        console.log("getOrderName",getOrderName)
-
       const prodName = getOrderName.filter(
         (item) => item.id == orderStatus.info.OrderId
       );

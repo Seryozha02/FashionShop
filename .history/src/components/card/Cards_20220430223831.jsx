@@ -41,7 +41,6 @@ const Cards = ({ pageDevider, setResponseInfo }) => {
         productsByPage.map((item) => {
           return (
             <CardItem
-            
               
               item={item}
               key={item.id}
@@ -67,6 +66,18 @@ const Cards = ({ pageDevider, setResponseInfo }) => {
           totalPages={Math.ceil(result.length / pageDevider)}
           
         />
+          {!eventSearch ? (
+            <Pagination
+              defaultActivePage={1}
+              secondary
+              onPageChange={goToPage}
+              totalPages={Math.ceil(result.length / pageDevider)}
+              // totalPages={numberPage.current}
+            />
+          ) : (
+            ""
+          )}
+      
       </div>
       
 

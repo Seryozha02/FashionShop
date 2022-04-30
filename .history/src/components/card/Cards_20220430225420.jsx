@@ -1,9 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Button, Pagination } from "semantic-ui-react";
 import { getData, getProducts } from "../../services/api";
-
 import CardItem from "./CardItem";
+import Search from "../search/Search";
 import "./cards.css";
+
+const Cards = ({ pageDevider, setResponseInfo }) => {
+  const [result, setResult] = useState([]);
+  const [productsByPage, setProductsByPage] = useState([]);
+  const [start, setStart] = useState(0);
+  const [eventSearch, setEventSearch] = useState("");
+
 
 const Cards = ({ pageDevider, setResponseInfo }) => {
   const [result, setResult] = useState([]);
@@ -41,7 +48,6 @@ const Cards = ({ pageDevider, setResponseInfo }) => {
         productsByPage.map((item) => {
           return (
             <CardItem
-            
               
               item={item}
               key={item.id}
@@ -59,17 +65,20 @@ const Cards = ({ pageDevider, setResponseInfo }) => {
                 })}
 
       <div className="pagination-container">
-        {/* semantic pagination */}
-        <Pagination
-          defaultActivePage={1}
-          secondary
-          onPageChange={goToPage}
-          totalPages={Math.ceil(result.length / pageDevider)}
-          
-        />
-      </div>
       
-
+          {!eventSearch ? (
+            <Pagination
+              defaultActivePage={1}
+              secondary
+              onPageChange={goToPage}
+              totalPages={Math.ceil(result.length / pageDevider)}
+              // totalPages={numberPage.current}
+            />
+          ) : (
+            ""
+          )}
+      
+      </div>  
     </div>
     </>
   );

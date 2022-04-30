@@ -41,7 +41,6 @@ const Cards = ({ pageDevider, setResponseInfo }) => {
         productsByPage.map((item) => {
           return (
             <CardItem
-            
               
               item={item}
               key={item.id}
@@ -58,18 +57,19 @@ const Cards = ({ pageDevider, setResponseInfo }) => {
           );
                 })}
 
-      <div className="pagination-container">
-        {/* semantic pagination */}
-        <Pagination
-          defaultActivePage={1}
-          secondary
-          onPageChange={goToPage}
-          totalPages={Math.ceil(result.length / pageDevider)}
-          
-        />
-      </div>
+          {!eventSearch ? (
+            <Pagination
+              defaultActivePage={1}
+              secondary
+              onPageChange={goToPage}
+              totalPages={Math.ceil(result.length / pageDevider)}
+              // totalPages={numberPage.current}
+            />
+          ) : (
+            ""
+          )}
       
-
+      </div>  
     </div>
     </>
   );

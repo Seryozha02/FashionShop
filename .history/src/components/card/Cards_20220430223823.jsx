@@ -41,7 +41,6 @@ const Cards = ({ pageDevider, setResponseInfo }) => {
         productsByPage.map((item) => {
           return (
             <CardItem
-            
               
               item={item}
               key={item.id}
@@ -67,6 +66,7 @@ const Cards = ({ pageDevider, setResponseInfo }) => {
           totalPages={Math.ceil(result.length / pageDevider)}
           
         />
+        
       </div>
       
 
