@@ -1,10 +1,12 @@
 import { Label } from "semantic-ui-react";
 import Cards from "../card/Cards";
-import useResponseInfo from "../customHook/useResponseInfo";
+import { Table, Sticky, Message } from "semantic-ui-react";
+import { useEffect, useState } from "react";
+import useResponseInfo from "../useResponseInfo/useResponseInfo";
 
 
 function Products() {
-  const [MessageComp, setResponseInfo] = useResponseInfo();
+  
 
   let countPageProduct = 4;
 
@@ -13,11 +15,9 @@ function Products() {
   return (
     <div className="home ui container">
       
-    <MessageComp />
       
       <Cards pageDevider={countPageProduct}
        setResponseInfo={setResponseInfo}
-
        
       />
     </div>

@@ -2,7 +2,9 @@ import Cards from "../card/Cards";
 import Slide from "../slider/Slides.jsx";
 import slidesData from "../../services/slideData.js";
 import "../home/home.css";
-import useResponseInfo from "../customHook/useResponseInfo";
+import { Table, Icon, Message } from "semantic-ui-react";
+import { useEffect, useState } from "react";
+import useResponseInfo from "../useResponseInfo/useResponseInfo";
 
 
 function Home() {
@@ -16,6 +18,7 @@ function Home() {
    
 
       <MessageComp />
+
 
       <Slide slides={slidesData()} />
       

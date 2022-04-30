@@ -41,7 +41,7 @@ const Cards = ({ pageDevider, setResponseInfo }) => {
         productsByPage.map((item) => {
           return (
             <CardItem
-              item={item}
+                          item={item}
               key={item.id}
               description={item?.description.comment || ""}
               image={item.img && item.img.length>0 && item.img[0].imagePath}

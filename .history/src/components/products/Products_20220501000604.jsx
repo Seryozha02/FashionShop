@@ -1,6 +1,7 @@
 import { Label } from "semantic-ui-react";
 import Cards from "../card/Cards";
-import useResponseInfo from "../customHook/useResponseInfo";
+import { useEffect, useState } from "react";
+import useResponseInfo from "../useResponseInfo/useResponseInfo";
 
 
 function Products() {

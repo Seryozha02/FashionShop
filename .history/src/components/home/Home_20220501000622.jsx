@@ -2,7 +2,7 @@ import Cards from "../card/Cards";
 import Slide from "../slider/Slides.jsx";
 import slidesData from "../../services/slideData.js";
 import "../home/home.css";
-import useResponseInfo from "../customHook/useResponseInfo";
+import useResponseInfo from "../useResponseInfo/useResponseInfo";
 
 
 function Home() {

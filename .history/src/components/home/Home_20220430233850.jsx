@@ -2,12 +2,15 @@ import Cards from "../card/Cards";
 import Slide from "../slider/Slides.jsx";
 import slidesData from "../../services/slideData.js";
 import "../home/home.css";
-import useResponseInfo from "../customHook/useResponseInfo";
+import { Table, Icon, Message } from "semantic-ui-react";
+import { useEffect, useState } from "react";
+import useResponseInfo from "../useResponseInfo/useResponseInfo";
 
 
 function Home() {
+ // const [responseInfo, setResponseInfo] = useState("");
   const [MessageComp, setResponseInfo] = useResponseInfo();
-  
+
   let countPageProduct = 4;
 
   
@@ -17,6 +20,9 @@ function Home() {
 
       <MessageComp />
 
+
+
+      
       <Slide slides={slidesData()} />
       
       <Cards

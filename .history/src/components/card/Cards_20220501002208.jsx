@@ -41,6 +41,7 @@ const Cards = ({ pageDevider, setResponseInfo }) => {
         productsByPage.map((item) => {
           return (
             <CardItem
+            
               item={item}
               key={item.id}
               description={item?.description.comment || ""}
